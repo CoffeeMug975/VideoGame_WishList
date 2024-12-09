@@ -9,46 +9,46 @@ import {
 } from "firebase/auth";
 import { auth } from "./firebase";
 
-// Create the context
 const AuthContext = createContext();
 
-// Provide the context
 export const AuthContextProvider = ({ children }) => {
-    
-    const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
 
-    // Sign in with GitHub
-    const gitHubSignIn = async () => {
-        const provider = new GithubAuthProvider();
-        return signInWithPopup(auth, provider);
-    };
+  const gitHubSignIn = async () => {
+    if (auth) {
+      const provider = new GithubAuthProvider();
+      return signInWithPopup(auth, provider);
+    }
+    throw new Error("Firebase auth is not initialized.");
+  };
 
-    // Sign out
-    const firebaseSignOut = async () => {
-        return signOut(auth);
-    };
+  const firebaseSignOut = async () => {
+    if (auth) {
+      return signOut(auth);
+    }
+    throw new Error("Firebase auth is not initialized.");
+  };
 
-    // Subscribe to auth state changes
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+  useEffect(() => {
+    if (auth) {
+      const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
-        });
-        return () => unsubscribe(); // Clean up subscription on unmount
-    }, []);
+      });
+      return () => unsubscribe();
+    }
+  }, []);
 
-    // Return the context value
-    return (
-        <AuthContext.Provider value={{ user, gitHubSignIn, firebaseSignOut }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={{ user, gitHubSignIn, firebaseSignOut }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
-// Custom hook to use the auth context
 export const useUserAuth = () => {
-    const context = useContext(AuthContext);
-    if (!context) {
-        throw new Error("useUserAuth must be used within an AuthContextProvider");
-    }
-    return context;
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useUserAuth must be used within an AuthContextProvider");
+  }
+  return context;
 };
