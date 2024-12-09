@@ -15,27 +15,39 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const gitHubSignIn = async () => {
-    if (auth) {
-      const provider = new GithubAuthProvider();
-      return signInWithPopup(auth, provider);
+    if (!auth) {
+      console.error("Firebase Auth is not initialized.");
+      return;
     }
-    throw new Error("Firebase auth is not initialized.");
+    const provider = new GithubAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (error) {
+      console.error("GitHub Sign-In Error:", error.message);
+    }
   };
 
   const firebaseSignOut = async () => {
-    if (auth) {
-      return signOut(auth);
+    if (!auth) {
+      console.error("Firebase Auth is not initialized.");
+      return;
     }
-    throw new Error("Firebase auth is not initialized.");
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error("Sign-Out Error:", error.message);
+    }
   };
 
   useEffect(() => {
-    if (auth) {
-      const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
-      });
-      return () => unsubscribe();
+    if (!auth) {
+      console.error("Firebase Auth is not initialized.");
+      return;
     }
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
   }, []);
 
   return (
