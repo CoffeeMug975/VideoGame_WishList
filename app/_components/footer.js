@@ -1,6 +1,6 @@
 
 import Image from 'next/image';
-import GitHubLogo from '../../../public/images/GitHub-Logo-Blue.jpg'
+import GitHubLogo from '../../public/images/GitHub-Logo-Blue.jpg';
 
 export default function Footer(){
 

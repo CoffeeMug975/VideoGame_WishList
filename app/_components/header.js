@@ -1,8 +1,8 @@
 
 
 import Image from 'next/image';
-import Logo from '../../../public/images/Wishlist-WebSite-Logo.png';
-import CheckMark from '../../../public/images/CheckMark.png';
+import Logo from "../../public/images/Wishlist-WebSite-Logo.png";
+import CheckMark from "../../public/images/CheckMark.png";
 
 export default function Header(){
     
