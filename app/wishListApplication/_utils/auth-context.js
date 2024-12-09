@@ -1,110 +1,42 @@
-// "use client";
-
-// import { useContext, createContext, useState, useEffect } from "react";
-// import {
-//     signInWithPopup,
-//     signOut,
-//     onAuthStateChanged,
-//     GithubAuthProvider,
-// } from "firebase/auth";
-// import { auth } from "./firebase";
-
-// const AuthContext = createContext();
-
-// export const AuthContextProvider = ({ children }) => {
-//     const [user, setUser] = useState(null);
-
-//     const gitHubSignIn = () => {
-//         const provider = new GithubAuthProvider();
-//         return signInWithPopup(auth, provider);
-//     };
-
-//     const firebaseSignOut = () => {
-//         return signOut(auth);
-//     };
-
-//     useEffect(() => {
-//         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-//         setUser(currentUser);
-//     });
-//     return () => unsubscribe();
-//     }, [user]);
-
-//     return (
-//         <AuthContext.Provider value={{ user, gitHubSignIn, firebaseSignOut }}>
-//             {children}
-//         </AuthContext.Provider>
-//     );
-// };
-
-// export const useUserAuth = () => {
-//     return useContext(AuthContext);
-// };
-
-
 "use client";
 
 import { useContext, createContext, useState, useEffect } from "react";
 import {
-  signInWithPopup,
-  signOut,
-  onAuthStateChanged,
-  GithubAuthProvider,
+    signInWithPopup,
+    signOut,
+    onAuthStateChanged,
+    GithubAuthProvider,
 } from "firebase/auth";
 import { auth } from "./firebase";
 
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+    const [user, setUser] = useState(null);
 
-  const gitHubSignIn = async () => {
-    if (!auth) {
-      console.error("Firebase Auth is not initialized.");
-      return;
-    }
-    const provider = new GithubAuthProvider();
-    try {
-      await signInWithPopup(auth, provider);
-    } catch (error) {
-      console.error("GitHub Sign-In Error:", error.message);
-    }
-  };
+    const gitHubSignIn = () => {
+        const provider = new GithubAuthProvider();
+        return signInWithPopup(auth, provider);
+    };
 
-  const firebaseSignOut = async () => {
-    if (!auth) {
-      console.error("Firebase Auth is not initialized.");
-      return;
-    }
-    try {
-      await signOut(auth);
-    } catch (error) {
-      console.error("Sign-Out Error:", error.message);
-    }
-  };
+    const firebaseSignOut = () => {
+        return signOut(auth);
+    };
 
-  useEffect(() => {
-    if (!auth) {
-      console.error("Firebase Auth is not initialized.");
-      return;
-    }
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser);
     });
     return () => unsubscribe();
-  }, []);
+    }, [user]);
 
-  return (
-    <AuthContext.Provider value={{ user, gitHubSignIn, firebaseSignOut }}>
-      {children}
-    </AuthContext.Provider>
-  );
+    return (
+        <AuthContext.Provider value={{ user, gitHubSignIn, firebaseSignOut }}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
 export const useUserAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useUserAuth must be used within an AuthContextProvider");
-  }
-  return context;
+    return useContext(AuthContext);
 };
