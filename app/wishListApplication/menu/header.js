@@ -1,13 +1,15 @@
 
-import Image from "next/image";
-import Logo from "../images/Wishlist-WebSite-Logo.png";
-import CheckMark from "../images/CheckMark.png";
+
+import Image from 'next/image';
+import Logo from '../../../public/images/Wishlist-WebSite-Logo.png';
+import CheckMark from '../../../public/images/CheckMark.png';
 
 export default function Header(){
     
     // UserInfo() function
     // - If signed out return blank box
     // - If signed in return box with (email, name, icon) With sign out button
+    
 
 
     return(
@@ -42,6 +44,7 @@ export default function Header(){
             </section>
 
             {/* Header-Right-Section =  Account details + sign out / Sign in */}
+            {/* might leave blank */}
             <section className="">
                 {/* Placeholder below */}
                 {/* <UserInfo /> */}
