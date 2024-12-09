@@ -17,7 +17,8 @@ export default function ProtectedPageComponent(){
                 { user ? (
                     <div className="flex flex-col items-center justify-center p-5 space-y-5">
                         <section className="w-4/5 flex flex-col items-center justify-center p-5 bg-slate-700 rounded-md text-center">
-                            <h2 className="text-2xl pb-2 font-serif">{user.displayName}'s Wishlist</h2>
+                            {/* eslint-disable-next-line react/no-unescaped-entities */}
+                            <h2 className="text-2xl pb-2 font-serif">{user.displayName}&#39;'s Wishlist</h2>
                             <Link href="../wishListApplication/" className="text-blue-500 mt-4 hover:underline">
                                 Back to User Page
                             </Link>
@@ -36,7 +37,7 @@ export default function ProtectedPageComponent(){
 
                                 <h3 className="text-xl pt-4 pb-4">Wish List</h3>
                                 <p>Click the X to remove an item</p>
-                                
+
                             </section>
 
                             <section className="w-1/2 p-5 bg-slate-700 rounded-md text-center">
