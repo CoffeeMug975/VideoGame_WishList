@@ -24,7 +24,7 @@ export default function Home(){
                     collection of your dreams!
                 </p>
                 <div className="m-5 flex flex-col items-center bg-slate-700 p-5 rounded-md w-1/4 mx-auto">
-                    <h3 className="text-center text-xl text-white">Authorize through GitHub</h3>
+                    <h3 className="text-center text-xl text-white">Authentication through GitHub</h3>
                     <Link
                         className="bg-blue-600 text-white rounded px-4 py-2 mt-4 text-center"
                         href="./wishListApplication/"
