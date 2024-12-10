@@ -44,10 +44,8 @@ export default function Header(){
             </section>
 
             {/* Header-Right-Section =  Account details + sign out / Sign in */}
-            {/* might leave blank */}
             <section className="">
-                {/* Placeholder below */}
-                {/* <UserInfo /> */}
+                {/* might leave blank */}
             </section>
         </section>
     );

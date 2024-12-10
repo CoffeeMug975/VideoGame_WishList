@@ -1,5 +1,7 @@
 
 import Link from "next/link";
+import Image from 'next/image';
+import CodeExample from "../public/images/Code.png"
 import HeaderComponent from "./_components/header";
 import FooterComponent from "./_components/footer";
 
@@ -10,7 +12,7 @@ export default function Home(){
         <main>
             <HeaderComponent />
             <div className="bg-gray-600 font-serif text-white p-5">
-                <h2 className="text-2xl pb-2 font-serif">Create Your Video Game Wishlist</h2>
+                <h2 className="text-2xl pb-2 font-serif underline underline-offset-4">Create Your Video Game Wishlist</h2>
                 <p>
                     Welcome to your ultimate videogame Wishlist platform! 
                     Our website empowers you to effortlessly create and 
@@ -29,6 +31,19 @@ export default function Home(){
                     >
                         Sign In Page
                     </Link>
+                </div>
+                <div>
+                    <h2
+                        className="text-center text-2xl pt-4 pb-2 text-white underline underline-offset-4"
+                    >
+                        Made using Next.js, Auth through FireBase and Deployed to vercel
+                    </h2>
+
+                    <Image
+                        src={CodeExample}
+                        alt="Code example made using carbon.now.sh"
+                        className="rounded-md w-2/4 mx-auto">
+                    </Image>
                 </div>
             </div>
 
